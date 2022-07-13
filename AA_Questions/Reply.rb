@@ -1,3 +1,7 @@
+require_relative 'user.rb'
+require_relative 'question.rb'
+require_relative 'QuestionDatabase'
+
 class Reply
   attr_accessor :id, :subject_question, :parent_reply_id, :author_id, :body
 

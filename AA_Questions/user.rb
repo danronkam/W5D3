@@ -1,3 +1,7 @@
+require_relative 'question'
+# require_relative 'QuestionDatabase'
+# # require_relative 'Reply.rb'
+
 class User
   attr_accessor :id, :fname, :lname
 
