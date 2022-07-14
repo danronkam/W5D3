@@ -1,25 +1,26 @@
-require_relative 'question'
-# require_relative 'QuestionDatabase'
-# # require_relative 'Reply.rb'
+require_relative 'question.rb'
+require_relative 'QuestionsDatabase'
+require_relative 'Reply.rb'
+require 'byebug'
 
 class User
   attr_accessor :id, :fname, :lname
 
   def self.find_by_id(id)
-    data = QuestionsDatabase.get_first_value(<<-SQL)
+    data = QuestionsDatabase.instance.execute(<<-SQL, id: id)
     SELECT
       *
     FROM
       users
     WHERE
-      users.id = id
+      users.id = :id
     SQL
 
     User.new(data.first)
   end
 
   def self.find_by_name(fname, lname)
-    data = QuestionsDatabase.get_first_value(<<-SQL)
+    data = QuestionsDatabase.instance.execute(<<-SQL)
     SELECT
       *
     FROM
@@ -33,9 +34,11 @@ class User
   end
 
   def initialize(object)
-    @id = object[:id]
-    @fname = object[:fname]
-    @lname = object[:lname]
+
+    @id = object['id']
+    @fname = object['fname']
+    @lname = object['lname']
+    # debugger
   end
 
   def authored_questions #should return an Array of Question Objects

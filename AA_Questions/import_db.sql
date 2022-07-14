@@ -10,8 +10,8 @@ PRAGMA foreign_keys = ON;
 
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
-  fname TEXT,
-  lname TEXT
+  fname TEXT NOT NULL,
+  lname TEXT NOT NULL
 );
 
 INSERT INTO
@@ -52,7 +52,7 @@ CREATE TABLE question_follows (
 INSERT INTO
   question_follows(question_id, user_id)
 VALUES
-    ((SELECT id FROM questions WHERE title = 'Kam Question'), (SELECT id FROM users WHERE fname = 'Dan' AND lname = 'Kam')),
+  ((SELECT id FROM questions WHERE title = 'Kam Question'), (SELECT id FROM users WHERE fname = 'Dan' AND lname = 'Kam')),
   ((SELECT id FROM questions WHERE title = 'Lam Question'), (SELECT id FROM users WHERE fname = 'Dan' AND lname = 'Lam'));
 
 -- REPLIES -----------------------------------------------------------------------------------
